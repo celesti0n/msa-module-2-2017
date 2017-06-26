@@ -51,7 +51,7 @@
     <Compile Include="CustomVision.xaml.cs">
       <DependentUpon>CustomVision.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\NotHotDogModel.cs" />
+    <Compile Include="Models\DogOrCatModel.cs" />
     <Compile Include="AzureManager.cs" />
   </ItemGroup>
   <ItemGroup>

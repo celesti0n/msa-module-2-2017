@@ -21,9 +21,9 @@ namespace Tabs
 		async void Handle_ClickedAsync(object sender, System.EventArgs e)
 		{
             loading.IsRunning = true;
-			List<NotHotDogModel> notHotDogInformation = await AzureManager.AzureManagerInstance.GetHotDogInformation();
+			List<DogOrCatModel> DogOrCatInformation = await AzureManager.AzureManagerInstance.GetDogOrCatInformation();
 
-			foreach (NotHotDogModel model in notHotDogInformation)
+			foreach (DogOrCatModel model in DogOrCatInformation)
 			{
 				var position = new Position(model.Latitude, model.Longitude);
 				var possibleAddresses = await geoCoder.GetAddressesForPositionAsync(position);
@@ -31,7 +31,7 @@ namespace Tabs
                     model.City = address;
 			}
 
-			HotDogList.ItemsSource = notHotDogInformation;
+			DogOrCatList.ItemsSource = DogOrCatInformation;
             loading.IsRunning = false;
 		}
 

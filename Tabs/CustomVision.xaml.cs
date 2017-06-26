@@ -25,7 +25,7 @@ namespace Tabs
 
 			if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
 			{
-				await DisplayAlert("No Camera", ":( No camera available.", "OK");
+				await DisplayAlert("No Camera", "Sorry, the camera could not be initialised.", "Okay");
 				return;
 			}
 
@@ -57,14 +57,14 @@ namespace Tabs
 
 			var position = await locator.GetPositionAsync(10000);
 
-            NotHotDogModel model = new NotHotDogModel()
+            DogOrCatModel model = new DogOrCatModel()
             {
                 Longitude = (float)position.Longitude,
                 Latitude = (float)position.Latitude
 
 			};
 
-            await AzureManager.AzureManagerInstance.PostHotDogInformation(model);
+            await AzureManager.AzureManagerInstance.PostDogOrCatInformation(model);
         }
 
         static byte[] GetImageAsByteArray(MediaFile file)

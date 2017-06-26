@@ -10,12 +10,12 @@ namespace Tabs
 
 		private static AzureManager instance;
 		private MobileServiceClient client;
-		private IMobileServiceTable<NotHotDogModel> notHotDogTable;
+		private IMobileServiceTable<DogOrCatModel> DogOrCatTable;
 
 		private AzureManager()
 		{
-			this.client = new MobileServiceClient("https://nothotdoginformation.azurewebsites.net");
-            this.notHotDogTable = this.client.GetTable<NotHotDogModel>();
+			this.client = new MobileServiceClient("http://dogorcat.azurewebsites.net/");
+            this.DogOrCatTable = this.client.GetTable<DogOrCatModel>();
 		}
 
 		public MobileServiceClient AzureClient
@@ -36,14 +36,14 @@ namespace Tabs
 			}
 		}
 
-		public async Task<List<NotHotDogModel>> GetHotDogInformation()
+		public async Task<List<DogOrCatModel>> GetDogOrCatInformation()
 		{
-			return await this.notHotDogTable.ToListAsync();
+			return await this.DogOrCatTable.ToListAsync();
 		}
 
-        public async Task PostHotDogInformation(NotHotDogModel notHotDogModel)
+        public async Task PostDogOrCatInformation(DogOrCatModel DogOrCatModel)
 		{
-			await this.notHotDogTable.InsertAsync(notHotDogModel);
+			await this.DogOrCatTable.InsertAsync(DogOrCatModel);
 		}
 	}
 }

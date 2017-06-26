@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Tabs.CustomVision" Title="Custom Vision">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Tabs.CustomVision" Title="Dog or Cat?">
     <StackLayout Margin="20" Orientation="Vertical">
-        <Button Text="Take Photo and Analyze" Clicked="loadCamera" />
+        <Label Text="Let Microsoft's Custom Vision AI determine whether you uploaded a dog or cat. Uploading more helps it learn too!" VerticalOptions="Center" HorizontalOptions="Center" />
+        <Button Text="Take a Photo to Analyse" Clicked="loadCamera" />
         <StackLayout Orientation="Horizontal">
             <Label x:Name="TagLabel">
             </Label>

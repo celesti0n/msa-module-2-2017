@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Tabs
 {
-    public class NotHotDogModel
+    public class DogOrCatModel
     {
 		[JsonProperty(PropertyName = "Id")]
 		public string ID { get; set; }
