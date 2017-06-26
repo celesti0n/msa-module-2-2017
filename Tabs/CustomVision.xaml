@@ -7,14 +7,11 @@
         <StackLayout Orientation="Vertical">
             <Label x:Name="Loading">
             </Label>        
-            <Label x:Name="TagLabel">
-            </Label>
-            <Label x:Name="Placeholder">
-            </Label>
-            <Label FontSize = "30" FontAttributes = "Bold" x:Name="ConclusionLabel">
+            <Label x:Name="TagLabel" FontSize = "30" FontAttributes = "Bold">
             </Label>
         </StackLayout>
         <Image x:Name="image" Aspect="AspectFit"/>
+        <Label x:Name="Credentials" FontSize = "10" FontFamily="Italic" Text="For Microsoft Student Accelerator Module 2 2017, Marcus Wong."></Label>
     </StackLayout>
     </ScrollView>
 </ContentPage>

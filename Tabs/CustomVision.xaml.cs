@@ -45,9 +45,10 @@ namespace Tabs
                 return file.GetStream();
             });
 
+            await MakePredictionRequest(file); // do the request first before posting, it's much better UX
             await postLocationAsync();
 
-            await MakePredictionRequest(file);
+
         }
 
         async Task postLocationAsync()
@@ -78,11 +79,12 @@ namespace Tabs
         async Task MakePredictionRequest(MediaFile file)
         {
             Loading.Text += "Please wait, your result is loading... \n";
+            TagLabel.Text = "\n"; //reset on new query
             var client = new HttpClient();
 
-            client.DefaultRequestHeaders.Add("Prediction-Key", "a51ac8a57d4e4345ab0a48947a4a90ac");
+            client.DefaultRequestHeaders.Add("Prediction-Key", "9547337b978c4c2f92ecf9d5ebc3e24f");
 
-            string url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/4da1555c-14ca-4aaf-af01-d6e1e97e5fa6/image?iterationId=7bc76035-3825-4643-917e-98f9d9f79b71";
+            string url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/86a79548-259e-467f-92b3-67577ce05fb8/image?iterationId=9c3eb031-32fe-4bf3-85b2-dcd8fb0c6ba2";
 
             HttpResponseMessage response;
 
@@ -104,44 +106,11 @@ namespace Tabs
                     //Get all Prediction Values
                     var Probability = from p in rss["Predictions"] select (string)p["Probability"];
                     var Tag = from p in rss["Predictions"] select (string)p["Tag"];
-                    int conclusion = 0; //0 = looks like neither, 1 = dog, 2 = cat,
                     //APPEND values to labels in XAML
                     for (int item = 0; item < Tag.Count(); item++) {
                         Loading.Text = "\n";
                         TagLabel.Text += "It looks " + Math.Round(Convert.ToDouble(Probability.ElementAt(item)) * 100, 2) + "% like a " + Tag.ElementAt(item) + ". \n";
-						// if any exceed 0.5, set flag
-                        if (Math.Round(Convert.ToDouble(Probability.ElementAt(item)) * 100, 2) > 50.00)
-						{
-                            if (Tag.ElementAt(item) == "Dog")
-							{
-								conclusion = 1;
-								break;
-							}
-                            else if (Tag.ElementAt(item) == "Cat")
-							{
-								conclusion = 2;
-								break;
-							}
-							else
-							{
-								conclusion = 0;
-								break;
-							}
-						}
                     }
-                    if (conclusion == 1)
-                    {
-                        ConclusionLabel.Text += "Dog.";
-                    }
-                    else if (conclusion == 2)
-                    {
-                        ConclusionLabel.Text += "Cat.";
-                    }
-                    else
-                    {
-                        ConclusionLabel.Text += "This isn't a dog or a cat.";
-                    }
-
                     //Get rid of file once we have finished using it
                     file.Dispose();
                 }
