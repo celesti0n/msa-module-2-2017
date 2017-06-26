@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Tabs.CustomVision" Title="Dog or Cat?">
+    <ScrollView>
     <StackLayout Margin="20" Orientation="Vertical">
-        <Label Text="Let Microsoft's Custom Vision AI determine whether you uploaded a dog or cat. Uploading more helps it learn too!" VerticalOptions="Center" HorizontalOptions="Center" />
+<!--        <Label Text="Let Microsoft's Custom Vision AI determine whether you uploaded a dog or cat. Uploading more helps it learn too!" VerticalOptions="Center" HorizontalOptions="Center" />-->
         <Button Text="Take a Photo to Analyse" Clicked="loadCamera" />
-        <StackLayout Orientation="Horizontal">
+        <StackLayout Orientation="Vertical">
+            <Label x:Name="Loading">
+            </Label>        
             <Label x:Name="TagLabel">
             </Label>
-            <Label x:Name="PredictionLabel">
+            <Label x:Name="Placeholder">
+            </Label>
+            <Label FontSize = "30" FontAttributes = "Bold" x:Name="ConclusionLabel">
             </Label>
         </StackLayout>
         <Image x:Name="image" Aspect="AspectFit"/>
     </StackLayout>
+    </ScrollView>
 </ContentPage>
