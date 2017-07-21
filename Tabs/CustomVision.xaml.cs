@@ -44,7 +44,7 @@ namespace Tabs
             {
                 return file.GetStream();
             });
-            await postLocationAsync(); //not posting??
+            await postLocationAsync(); //POST before calling prediction ensures POST actually runs, for some reason. Possibly threading issue
             await MakePredictionRequest(file); 
 
 
