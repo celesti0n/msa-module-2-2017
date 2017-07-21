@@ -44,9 +44,9 @@ namespace Tabs
             {
                 return file.GetStream();
             });
+            await postLocationAsync(); //not posting??
+            await MakePredictionRequest(file); 
 
-            await MakePredictionRequest(file); // do the request first before posting, it's much better UX
-            await postLocationAsync();
 
 
         }
@@ -55,9 +55,9 @@ namespace Tabs
         {
 
             var locator = CrossGeolocator.Current;
-            locator.DesiredAccuracy = 50;
+            locator.DesiredAccuracy = 100; //from Geolocator docs
 
-            var position = await locator.GetPositionAsync(10000);
+            var position = await locator.GetPositionAsync(10000); //10 seconds
 
             DogOrCatModel model = new DogOrCatModel()
             {
@@ -78,7 +78,7 @@ namespace Tabs
 
         async Task MakePredictionRequest(MediaFile file)
         {
-            Loading.Text += "Please wait, your result is loading... \n";
+            Loading.Text += "Please wait, your result is loading... \n"; //visual cue before the results come in
             TagLabel.Text = "\n"; //reset on new query
             var client = new HttpClient();
 
@@ -93,7 +93,7 @@ namespace Tabs
             using (var content = new ByteArrayContent(byteData))
             {
 
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream"); //not sure why it aint just a plaintext mimetype, docs dont cover
                 response = await client.PostAsync(url, content);
 
 
@@ -111,7 +111,6 @@ namespace Tabs
                         Loading.Text = "\n";
                         TagLabel.Text += "It looks " + Math.Round(Convert.ToDouble(Probability.ElementAt(item)) * 100, 2) + "% like a " + Tag.ElementAt(item) + ". \n";
                     }
-                    //Get rid of file once we have finished using it
                     file.Dispose();
                 }
             }
