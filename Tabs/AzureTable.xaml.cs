@@ -11,7 +11,7 @@ namespace Tabs
     public partial class AzureTable : ContentPage
     {
 		Geocoder geoCoder;
-       
+
         public AzureTable()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace Tabs
                 foreach (var address in possibleAddresses) //get city value from API call
                     model.City = address;
 			}
-
+            
             DogOrCatList.ItemsSource = DogOrCatInformation; //DogOrCatList declared in .xaml as ListView, ItemsSource is property to display
             loading.IsRunning = false;
 		}
